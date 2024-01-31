@@ -1,0 +1,28 @@
+<div class="container">
+  <p5><strong>商品一覧</strong></p5>
+      <table class="mt-5 table table-bordered">
+        <thead>
+          <tr>
+            <th>商品ID</th>
+            <th>商品名</th>
+            <th>商品説明</th>
+            <th>税抜価格</th>
+            <th>ジャンル</th>
+            <th>ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @items.each do |item| %>
+          <tr>
+            <td><%= item.id %></td>
+            <td><%= link_to item.name, admin_item_path(item.id) %></td>
+            <td><%= item.introduction %></td>
+            <td><%= item.price %></td>
+            <td><%= item.genre.name %></td>
+            <td><%= I18n.t('item.is_sold_out') %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <%= paginate @items, class: "mt-2 text-center" %>
+</div>
