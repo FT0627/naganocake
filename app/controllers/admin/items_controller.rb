@@ -26,10 +26,10 @@ class Admin::ItemsController < ApplicationController
   def update
     item = Item.find(params[:id])
     if item.update(item_params)
-      flasn[:notice] = "Item was successfully updated."
+      flash[:notice] = "Item was successfully updated."
       redirect_to admin_item_path(item)
     else
-      render :show
+      redirect_to edit_admin_item_path(item)
     end
   end
   
@@ -40,6 +40,6 @@ class Admin::ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :introduction, :price, :genre_id, :is_sold_out, :image)
+    params.require(:item).permit(:name, :introduction, :price, :genre_id, :is_sold_out, :item_image)
   end
 end

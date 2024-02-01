@@ -31,9 +31,3 @@
 
 en:
   hello: "Hello world"
-
-ja: 
-  is_sold_out:
-    "false": "販売中"
-    "true": "販売停止中"
-    
