@@ -1,0 +1,54 @@
+<div class="container">
+  <h5><strong>
+    <%= @customer.last_name + @customer.first_name %>
+  </strong>さんの
+  <strong>会員情報編集</strong></h5>
+  
+  <table class="mt-5 table table-borderless">
+    <%= form_with model: @customer, url: admin_customer_path(@customer) do |f| %>
+    <tr>
+      <th>会員ID</th>
+      <td><%= @customer.id %></td>
+    </tr>
+    <tr>
+      <th>氏名</th>
+      <td><%= f.text_field :last_name %> <%= f.text_field :first_name, class: "ml-5" %></td>
+    </tr>
+    <tr>
+      <th>フリガナ</th>
+      <td><%= f.text_field :last_name_kana %> <%= f.text_field :first_name_kana, class: "ml-5" %></td>
+    </tr>
+    <tr>
+      <th>郵便番号</th>
+      <td><%= f.text_field :postal_code %></td>
+    </tr>
+    <tr>
+      <th>住所</th>
+      <td><%= f.text_field :address %></td>
+    </tr>
+    <tr>
+      <th>電話番号</th>
+      <td><%= f.text_field :telephone_number %></td>
+    </tr>
+    <tr>
+      <th>メールアドレス</th>
+      <td><%= f.text_field :email %></td>
+    </tr>
+    <tr>
+      <th>会員ステータス</th>
+      <td>
+        <%= f.radio_button :is_active, true %>
+        <%= f.label :is_active,"有効", {value: :true, style: "display: inline-block;"} %>
+        <%= f.radio_button :is_active, false %>
+        <%= f.label :is_active, "退会", {value: :false, style: "display: inline-block;"} %>
+      </td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>
+        <%= f.submit '変更を保存', class: "btn btn-success" %></td>
+    </tr>
+    <% end %>
+  </table>
+  
+</div>

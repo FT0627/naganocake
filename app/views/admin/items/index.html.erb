@@ -19,10 +19,16 @@
             <td><%= item.introduction %></td>
             <td><%= item.price %></td>
             <td><%= item.genre.name %></td>
-            <td><%= I18n.t('item.is_sold_out') %></td>
+            <td>
+             <% if item.is_sold_out == false %>
+             販売中
+             <% else %>
+             販売停止中
+             <% end %>
+            </td>
           </tr>
           <% end %>
         </tbody>
       </table>
-    <%= paginate @items, class: "mt-2 text-center" %>
+    <%= paginate @items, class: "mt-2 mx-auto" %>
 </div>

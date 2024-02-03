@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       get 'home/about', to: 'homes#about', as: :about
       resources :items, only: [:index, :new, :create, :update, :edit, :show]
       resources :genres, only: [:index, :create, :edit, :update]
+      resources :customers, only: [:index, :show, :edit, :update]
     end
 
     scope module: :public do
@@ -25,6 +26,7 @@ Rails.application.routes.draw do
       patch 'customer/withdraw', to: 'customers#withdraw'
       resources :customers, only: [:show, :edit, :update, :confirm_withdraw, :withdraw]
       resources :items, only: [:index, :show]
+      resources :addresses, only: [:index, :create, :update, :destroy, :edit]
     end
 
 
