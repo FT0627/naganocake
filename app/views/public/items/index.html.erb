@@ -17,7 +17,7 @@
       </table>
     </div>
     <div class="col-sm-9">
-      <h5><strong>商品一覧</strong><span>(全X件)</span></h5>
+      <h5><strong>商品一覧</strong><span>(全<%= @items.count %>件)</span></h5>
       <div class="row my-3 d-flex align-content-between flex-wrap">
         <% @items.each do |item| %>
         <div class="col-sm-2">

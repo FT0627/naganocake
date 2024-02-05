@@ -1,6 +1,7 @@
 class Item < ApplicationRecord
   belongs_to :genre
   has_many :order_items
+  has_many :cart_items
   
   has_one_attached :item_image
   
@@ -25,4 +26,10 @@ def get_item_image(width, height)
     end
     item_image.variant(resize_to_limit: [width, height]).processed
   end
+  
+ def with_tax_price
+   (price * 1.1).floor
+ end
+ 
+ 
 end
