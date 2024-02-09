@@ -25,7 +25,7 @@ def get_item_image(width, height)
       item_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
     item_image.variant(resize_to_limit: [width, height]).processed
-  end
+end
   
  def with_tax_price
    (price * 1.1).floor

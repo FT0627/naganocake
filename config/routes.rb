@@ -24,10 +24,12 @@ Rails.application.routes.draw do
       patch 'customers/information', to: 'customers#update'
       get 'customers/confirm_withdraw', to: 'customers#confirm_withdraw', as: :confirm_withdraw
       patch 'customer/withdraw', to: 'customers#withdraw'
-      resources :customers, only: [:show, :edit, :update, :confirm_withdraw, :withdraw]
       resources :items, only: [:index, :show]
       resources :addresses, only: [:index, :create, :update, :destroy, :edit]
-      resources :cart_items, only: [:create, :index, :update, :destroy, :destroy_all]
+      resources :cart_items, only: [:create, :index, :update, :destroy]
+      delete '/cart_items', to: 'cart_items#destroy_all'
+      resources :orders, only: [:new, :index, :show]
+      get '/orders/complete', to: 'orders#complete'
     end
 
 
