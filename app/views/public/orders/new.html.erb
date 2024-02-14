@@ -1,6 +1,6 @@
 <div class="container">
   <h5 class="p-3">注文情報入力</h5>
-  <%= form_with model: @order do|f| %>
+  <%= form_with model: @order, url: confirm_order_path, method: :post do |f| %>
     <h5><strong>支払方法</strong></h5>
       <div class="px-5">
         <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
@@ -36,6 +36,6 @@
           </tr>
         </table>
       </div>
-      <%= f.submit "確認画面へ進む" , class: "mx-auto"%>
+      <%= f.submit "確認画面へ進む", class: "mx-auto"%>
   <% end %>
 </div>
