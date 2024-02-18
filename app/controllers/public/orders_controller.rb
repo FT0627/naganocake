@@ -1,21 +1,52 @@
 class Public::OrdersController < ApplicationController
   before_action :authenticate_customer!
-  
+
+  def new
+    @order = Order.new
+  end
+
   def confirm_order
     @order = Order.new(order_params)
-    if params[:order][:select_address] == "0"
-        @order.postal_code = current_customer.postal_code
-        @order.address = current_customer.address
-        @order.name = current_customer.first_name + current_customer.last_name
-    elsif params[:order][:select_address] == "1"
-        
-    else
-    
+    if params[:order][:select_address] == "1"
+     @order.postal_code = current_customer.postal_code
+     @order.address = current_customer.address
+     @order.name = current_customer.last_name + current_customer.first_name
+    elsif params[:order][:select_address] == "2"
+     @address = Address.find(params[:order][:address_id])
+     @order.postal_code = @address.postal_code
+     @order.address = @address.address
+     @order.name = @address.name
+    elsif params[:order][:select_address] == "3"
+     @order.customer_id = current_customer.id
+    end
+      @cart_items = current_customer.cart_items
+      @new_order = Order.new
+      render :confirm_order
   end
-  
+
+  def create
+    @order = current_customer.orders.new(order_params)
+    @order.save
+
+    @cart_items = current_customer.cart_items
+    @cart_items.each do |cart_item|
+      @order_items = OrderItem.new
+      @order_items.order_id = @order.id
+      @order_items.item_id = cart_item.item.id
+      @order_items.tax_price = cart_item.item.price * 1.1
+      @order_items.amount = cart_item.amount
+      @order_items.order_item_status_method = 1
+      @order_items.save
+    end
+    # cart_itemの中の情報を消す(全て)
+    current_customer.cart_items.destroy_all
+    # redirect先を決める
+    redirect_to orders_complete_path
+  end
+
   private
-  
+
   def order_params
-    params.require(:order).permit(:payment_method, :postal_code, :address, :name )  
+    params.require(:order).permit(:payment_method, :postal_code, :address, :name, :customer_id, :postage, :total_price, :status )
   end
 end

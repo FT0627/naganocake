@@ -23,7 +23,7 @@
     </tr>
     <tr>
       <th>住所</th>
-      <td><%= @customer.address, size: 50% %></td>
+      <td><%= @customer.address %></td>
     </tr>
     <tr>
       <th>電話番号</th>
@@ -46,7 +46,7 @@
     <tr>
       <th></th>
       <td>
-        <%= link_to '編集する', edit_admin_customer_path(@customer), class: "mr-5 btn btn-success" %><span>
+        <%= link_to '編集する', admin_customers_path(@customer), class: "mr-5 btn btn-success" %><span>
           <%= link_to '注文履歴一覧を見る', admin_customers_path, class: "btn btn-primary" %>
         </span>
       </td>

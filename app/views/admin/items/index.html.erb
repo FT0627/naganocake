@@ -1,11 +1,13 @@
 <div class="container">
-  <p5><strong>商品一覧</strong></p5>
-      <table class="mt-5 table table-bordered">
+  <div class="m-3 row d-flex justify-content-between">
+    <p5><strong>商品一覧</strong></p5>
+    <%= link_to "商品登録", new_admin_item_path, class: "btn btn-primary" %>
+  </div>
+      <table class="table table-bordered">
         <thead>
           <tr>
             <th>商品ID</th>
             <th>商品名</th>
-            <th>商品説明</th>
             <th>税抜価格</th>
             <th>ジャンル</th>
             <th>ステータス</th>
@@ -16,7 +18,6 @@
           <tr>
             <td><%= item.id %></td>
             <td><%= link_to item.name, admin_item_path(item.id) %></td>
-            <td><%= item.introduction %></td>
             <td><%= item.price %></td>
             <td><%= item.genre.name %></td>
             <td>

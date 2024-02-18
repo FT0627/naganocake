@@ -1,10 +1,10 @@
 <div class="container">
-  <h5><strong>商品詳細</strong></h5>
+  <h5 class="m-3"><strong>商品詳細</strong></h5>
   <div class="row mt-5 justify-content-center">
-    <div class="col-sm-4">
-       <p class="my-3 ml-4"><%= image_tag @item.get_item_image(100, 100) %></p>
+    <div class="col-lg-4">
+       <p class="my-3 ml-4"><%= image_tag @item.get_item_image(300, 300) %></p>
     </div>
-    <div class="col-sm-7 offset-ms-1">
+    <div class="col-lg-7 offset-ms-1">
        <table class="table table-bordered">
          <tr>
            <th>商品名</th>
@@ -16,7 +16,7 @@
          </tr>
          <tr>
            <th>税込価格 (税抜価格)</th>
-           <td><%= @item.price * 1.1 %>円 (<%= @item.price %>円)</td>
+           <td><%= @item.with_tax_price %>円 (<%= @item.price %>円)</td>
          </tr>
          <tr>
            <th>販売ステータス</th>

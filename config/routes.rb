@@ -10,10 +10,10 @@ Rails.application.routes.draw do
 
     namespace :admin do
       root to: 'homes#top'
-      get 'home/about', to: 'homes#about', as: :about
       resources :items, only: [:index, :new, :create, :update, :edit, :show]
       resources :genres, only: [:index, :create, :edit, :update]
       resources :customers, only: [:index, :show, :edit, :update]
+      resources :orders, only: [:show, :update]
     end
 
     scope module: :public do
@@ -31,6 +31,7 @@ Rails.application.routes.draw do
       resources :orders, only: [:new, :index, :show]
       get '/orders/complete', to: 'orders#complete'
       post 'orders/confirm_order', to: 'orders#confirm_order', as: :confirm_order
+      post '/orders', to: 'orders#create'
     end
 
 
