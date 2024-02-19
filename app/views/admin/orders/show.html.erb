@@ -23,8 +23,10 @@
       <tr>
         <th>注文ステータス</th>
         <td>
-          
-          
+          <%= form_with model: @order, url: admin_order_path(@order) do |f| %>
+          <%= f.select :status, Order.statuses_i18n.invert %>
+          <%= f.submit "更新", class: 'btn btn-success' %>
+          <% end %>
         </td>
       </tr>
     </table>
@@ -42,9 +44,20 @@
           </tr>
         </thead>
         <tbody>
-          <% @order.order_items.each do |item| %> 
+          <% @order_items.each do |order_item| %>
           <tr>
-            <td><%=  %></td>
+            <td><%= order_item.item.name %></td>
+            <td><%= order_item.tax_price %></td>
+            <td><%= order_item.amount %></td>
+            <td>
+              <%= order_item.tax_price * order_item.amount %>
+            </td>
+            <td>
+              <%= form_with model: order_item, url: admin_order_item_path(order_item.item) do |f| %>
+              <%= f.select :status, OrderItem.statuses_i18n.invert %>
+              <%= f.submit "更新", class: 'btn btn-success' %>
+              <% end %>
+            </td>
           </tr>
           <% end %>
         </tbody>

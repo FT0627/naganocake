@@ -2,7 +2,7 @@ class OrderItem < ApplicationRecord
   belongs_to :order
   belongs_to :item
 
-  enum order_item_status_method: 
+  enum status: 
   { 
     pending: 1, 
     waiting_for_production: 2, 

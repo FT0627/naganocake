@@ -1,5 +1,6 @@
 class Public::OrdersController < ApplicationController
   before_action :authenticate_customer!
+  before_action :order_item_exist?, only: [:confirm_order]
 
   def new
     @order = Order.new
@@ -7,7 +8,7 @@ class Public::OrdersController < ApplicationController
 
   def confirm_order
     @order = Order.new(order_params)
-    if params[:order][:select_address] == "1"
+    if params[:select_address] == "1"
      @order.postal_code = current_customer.postal_code
      @order.address = current_customer.address
      @order.name = current_customer.last_name + current_customer.first_name
@@ -35,7 +36,6 @@ class Public::OrdersController < ApplicationController
       @order_items.item_id = cart_item.item.id
       @order_items.tax_price = cart_item.item.price * 1.1
       @order_items.amount = cart_item.amount
-      @order_items.order_item_status_method = 1
       @order_items.save
     end
     # cart_itemの中の情報を消す(全て)
@@ -47,6 +47,12 @@ class Public::OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:payment_method, :postal_code, :address, :name, :customer_id, :postage, :total_price, :status )
+    params.require(:order).permit(:payment_method, :postal_code, :address, :name, :customer_id, :postage, :total_price, :status)
+  end
+  
+  def order_item_exist?
+    if current_customer.cart_items.present? == false
+      redirect_to cart_items_path
+    end
   end
 end

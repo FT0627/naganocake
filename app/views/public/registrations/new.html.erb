@@ -32,7 +32,7 @@
     </tr>
     <tr>
       <th><% if @minimum_password_length %>
-          <em>パスワード　　　<%= @minimum_password_length %>文字以上)</em>
+          <em>パスワード　　　(<%= @minimum_password_length %>文字以上)</em>
           <% end %>
       </th>
       <td>　　　<%= f.password_field :password, autocomplete: "new-password" %></td>
