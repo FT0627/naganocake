@@ -43,6 +43,16 @@ class Public::OrdersController < ApplicationController
     # redirect先を決める
     redirect_to orders_complete_path
   end
+  
+  def index
+    @orders = Order.all
+  end
+  
+  def show
+    @order = Order.find(params[:id])
+    @order_items = @order.order_items
+  end
+ 
 
   private
 
