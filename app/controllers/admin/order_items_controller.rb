@@ -3,8 +3,12 @@ class Admin::OrderItemsController < ApplicationController
   
   def update
     @order_item = OrderItem.find(params[:id])
+    @order = @order_item.order
     @order_item.update(order_item_params)
-    redirect_to admin_order_path
+    if @order.order_items.status.all == "production_compleated"
+      @order.update(status: "ready_to_ship")
+    end
+    redirect_to admin_order_path(@order)
   end
   
   private

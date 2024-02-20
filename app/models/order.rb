@@ -1,6 +1,9 @@
 class Order < ApplicationRecord
   belongs_to :customer
-  has_many :order_items
+  has_many :order_items, dependent: :destroy
+  
+  attribute :select_address
+  attribute :address_id
   
   validates :postal_code, presence: true
   validates :address, presence: true
