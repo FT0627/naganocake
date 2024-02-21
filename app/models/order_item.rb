@@ -6,7 +6,7 @@ class OrderItem < ApplicationRecord
     pending: 1,
     waiting_for_production: 2,
     in_production: 3,
-    production_compleated: 4
+    production_completed: 4
   }
 
 def sum_price

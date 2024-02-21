@@ -52,7 +52,7 @@
             <td><%= order_item.amount %></td>
             <td><%= order_item.sum_price %></td>
             <td>
-              <%= form_with model: order_item, url: admin_order_item_path(order_item.item) do |f| %>
+              <%= form_with model: order_item, url: admin_order_item_path(order_item.id) do |f| %>
               <%= f.select :status, OrderItem.statuses_i18n.invert %>
               <%= f.submit "更新", class: 'btn btn-success' %>
               <% end %>

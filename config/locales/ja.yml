@@ -15,7 +15,7 @@ ja:
         pending: "着手不可"
         waiting_for_production: "制作待ち"
         in_production: "制作中"
-        production_compleated: "制作完了"
+        production_completed: "制作完了"
   activerecord:
     errors:
       messages:
