@@ -26,6 +26,10 @@
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
               <ul  class="navbar-nav ml-auto">
               <% if customer_signed_in? %>
+                <%= form_with url: items_path, method: :get do |f| %>
+                  <%= f.text_field :item_name %>
+                  <%= f.submit '検索' %>
+                <% end %>
                 <li class="nav-item">
                   <%= link_to "マイページ",my_page_path, class: "mr-2 btn btn-outline-dark" %>
                 </li>
@@ -39,6 +43,10 @@
                   <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "btn btn-outline-dark" %>
                 </li>
               <% elsif admin_signed_in? %>
+                <%= form_with url: admin_items_path, method: :get do |f| %>
+                  <%= f.text_field :item_name %>
+                  <%= f.submit '検索' %>
+                <% end %>
                 <li class="nav-item">
                   <%= link_to "商品一覧", admin_items_path, class: "mr-2 btn btn-outline-dark" %>
                 </li>
@@ -55,6 +63,10 @@
                   <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-dark" %>
                 </li>
               <% else %>
+                <%= form_with url: items_path, method: :get do |f| %>
+                  <%= f.text_field :item_name %>
+                  <%= f.submit '検索' %>
+                <% end %>
                 <li class="nav-item">
                   <%= link_to "About", about_path, class: "mr-2 btn btn-outline-dark" %>
                 </li>
